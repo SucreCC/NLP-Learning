@@ -13,7 +13,10 @@
 - [4. 神经网络表示](#4-神经网络表示)
   - [4.1 NNLM](#41-nnlm)
   - [4.2 Word2Vec](#42-word2vec)
-  - [4.3 Sense2Vec](#43-sense2vec)
+  - [4.3 GloVe](#43-glove)
+  - [4.4 ELMo](#44-elmo)
+  - [4.5 BERT](#45-bert)
+  - [4.6 GPT](#46-gpt)
 - [5. 词嵌入为何不采用one-hot向量](#5-词嵌入为何不采用one-hot向量)
 
 ---
@@ -81,13 +84,44 @@
 
 **存在问题**：无法处理多义词。
 
-### 4.3 Sense2Vec
-通过为每个词提供上下文信息，解决 Word2Vec 无法处理多义词的问题。
+### 4.3 GloVe（Global Vectors for Word Representation）
+GloVe 是一种基于共现矩阵的词嵌入方法，由斯坦福大学于 2014 年提出。GloVe 将词与词之间的共现信息编码为稠密向量，并通过矩阵分解的方式进行优化。
+
+**特点**：
+- GloVe 模型捕捉了全局语料库的统计信息，比 Word2Vec 更适合描述词语的全局共现关系。
+- GloVe 通过对共现矩阵的优化，保留了词与词之间的距离和方向关系。
+
+### 4.4 ELMo（Embeddings from Language Models）
+ELMo 由 AllenNLP 团队于 2018 年提出，是一种基于上下文的词嵌入模型。与静态词嵌入方法不同，ELMo 可以根据上下文生成动态的词表示。
+
+**特点**：
+- ELMo 使用双向 LSTM（BiLSTM），可以捕捉到句子中的前后语境。
+- 词的嵌入向量会根据不同的上下文变化，因此能够处理多义词。
+
+### 4.5 BERT（Bidirectional Encoder Representations from Transformers）
+BERT 是 Google 于 2018 年提出的革命性预训练语言模型，基于 Transformer 架构。它通过双向编码器捕捉上下文信息，并使用无监督的 Masked Language Model 进行预训练。
+
+**特点**：
+- BERT 是双向模型，能够同时理解句子的前后文。
+- BERT 是预训练模型，可以通过微调适应不同的下游任务（如分类、问答、文本生成）。
+- BERT 生成的词向量是动态的，能够捕捉到语境中的不同含义。
+
+### 4.6 GPT（Generative Pre-trained Transformer）
+GPT 是 OpenAI 于 2018 年提出的生成式预训练语言模型，使用自回归（Autoregressive）方法进行文本生成。
+
+**特点**：
+- GPT 使用 Transformer 的解码器部分，并通过无监督学习进行大规模预训练。
+- GPT 可以用于生成任务（如对话系统、文本生成）。
+- 最新的 GPT-3 和 GPT-4 拥有数十亿到上千亿参数，进一步提升了生成质量。
+
+### 4.7 现代预训练模型的比较
+- **Word2Vec 和 GloVe** 是静态词嵌入模型，无法根据上下文动态调整词的表示。
+- **ELMo、BERT 和 GPT** 是基于上下文的动态嵌入模型，能够根据语境生成不同的词表示。
+- **BERT** 专注于理解任务，而 **GPT** 更专注于生成任务。
 
 ---
 
 ## 5. 词嵌入为何不采用One-hot向量
 
 One-hot向量无法准确表达不同词之间的相似度。Word2Vec 通过学习词向量解决了这个问题，使得不同词之间的相似性和类比关系可以通过向量表示。
-
 
